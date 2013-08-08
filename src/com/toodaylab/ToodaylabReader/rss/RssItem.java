@@ -1,6 +1,8 @@
 package com.toodaylab.ToodaylabReader.rss;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -9,19 +11,25 @@ import java.util.List;
  * Time: 下午10:35
  */
 public class RssItem {
+
+    private int id;
     private String title;
     private StringBuilder desc;
     private String link;
     private List<String> category;
-    private String pubdate;
+    private long pubdate;
 
     public RssItem() {
         desc = new StringBuilder();
         category = new ArrayList<String>();
     }
 
-    public void addCategory(String cg){
-        category.add(cg);
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -52,11 +60,51 @@ public class RssItem {
         return category;
     }
 
-    public String getPubdate() {
+    /**
+     * for xml parser add category one by one
+     * @param cg
+     */
+    public void addCategory(String cg){
+        category.add(cg);
+    }
+
+    /**
+     * gen category string for db
+     * @return
+     */
+    public String getCategoryForDB(){
+        StringBuilder sb = new StringBuilder();
+        for(String cate : category){
+            sb.append(cate.toString().trim()).append(";");
+        }
+        String cgStr = sb.toString();
+        if(cgStr.endsWith(";"))
+            cgStr = cgStr.substring(0, cgStr.length()-1);
+        return  cgStr;
+    }
+
+    /**
+     * gen category list from db
+     * @param categoryStr
+     */
+    public void setCategoryFromDB(String categoryStr){
+        String[] cgArray = categoryStr.split(";");
+        category = Arrays.asList(cgArray);
+    }
+
+    public long getPubdate() {
         return pubdate;
     }
 
     public void setPubdate(String pubdate) {
-        this.pubdate = pubdate;
+        this.pubdate = new Date(pubdate.trim()).getTime();
+    }
+
+    public Date getRealPubdate(){
+        return new Date(pubdate);
+    }
+
+    public void setPubdateFromDB(String time){
+        this.pubdate = new Date(Long.valueOf(time)).getTime();
     }
 }

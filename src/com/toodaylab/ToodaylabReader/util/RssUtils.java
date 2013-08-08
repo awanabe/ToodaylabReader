@@ -1,4 +1,4 @@
-package com.toodaylab.ToodaylabReader;
+package com.toodaylab.ToodaylabReader.util;
 
 import com.toodaylab.ToodaylabReader.handler.RssHandler;
 import com.toodaylab.ToodaylabReader.rss.RssFeed;
