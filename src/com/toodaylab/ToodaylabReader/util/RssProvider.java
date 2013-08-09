@@ -55,6 +55,11 @@ public class RssProvider {
         dbHelper.close();
     }
 
+    /**
+     * add one item into db
+     * @param item
+     * @return
+     */
     public long insertItem(RssItem item){
         ContentValues values = new ContentValues();
         values.put(KEY_TITLE, item.getTitle().trim());
@@ -65,8 +70,13 @@ public class RssProvider {
         return db.insert(TABLE_NAME, null, values);
     }
 
+    /**
+     * get one page items
+     * @param page
+     * @return
+     */
     public List<RssItem> getOnePageItems(int page){
-       List<RssItem> list = new ArrayList<RssItem>();
+        List<RssItem> list = new ArrayList<RssItem>();
         int offset = page * PAGE_SIZE;
         Cursor c = db.query(
                 true,
@@ -87,6 +97,30 @@ public class RssProvider {
         }
         return list;
     }
+
+    /**
+     * get newest item
+     * @return
+     */
+    public RssItem getLatestItem(){
+        Cursor c = db.query(
+                true,
+                TABLE_NAME,
+                DB_KEY_ORDER,
+                null,
+                null,
+                null,
+                null,
+                DB_DEFAULT_ORDER,
+                "0,1"
+        );
+        if(c.moveToFirst()){
+            return this.parseItemFromDB(c);
+        }
+        return null;
+    }
+
+
 
     private RssItem parseItemFromDB(Cursor c){
         RssItem item = new RssItem();

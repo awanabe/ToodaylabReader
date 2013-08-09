@@ -1,5 +1,6 @@
 package com.toodaylab.ToodaylabReader.util;
 
+import android.util.Log;
 import com.toodaylab.ToodaylabReader.handler.RssHandler;
 import com.toodaylab.ToodaylabReader.rss.RssFeed;
 import org.xml.sax.InputSource;
@@ -16,6 +17,8 @@ import java.net.URL;
  */
 public class RssUtils {
 
+    public static final String LOG_TAG = "TOODAY";
+
     public static final String rssUri = "http://www.toodaylab.com/feed";
 
     public static RssFeed getFeed(String uri){
@@ -30,6 +33,7 @@ public class RssUtils {
             reader.parse(in);
             return handler.getFeed();
         } catch (Exception e) {
+            Log.e(LOG_TAG, "getFeed", e);
             return null;
         }
 
