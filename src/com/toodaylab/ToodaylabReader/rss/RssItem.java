@@ -107,4 +107,5 @@ public class RssItem {
     public void setPubdateFromDB(String time){
         this.pubdate = new Date(Long.valueOf(time)).getTime();
     }
+
 }

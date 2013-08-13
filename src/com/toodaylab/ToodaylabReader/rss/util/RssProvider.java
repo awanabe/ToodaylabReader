@@ -1,4 +1,4 @@
-package com.toodaylab.ToodaylabReader.util;
+package com.toodaylab.ToodaylabReader.rss.util;
 
 import android.content.ContentValues;
 import android.content.Context;

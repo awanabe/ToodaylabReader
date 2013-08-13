@@ -7,13 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 import com.toodaylab.ToodaylabReader.rss.RssFeed;
 import com.toodaylab.ToodaylabReader.rss.RssItem;
-import com.toodaylab.ToodaylabReader.util.RssProvider;
-import com.toodaylab.ToodaylabReader.util.RssUtils;
+import com.toodaylab.ToodaylabReader.rss.util.RssProvider;
+import com.toodaylab.ToodaylabReader.rss.util.RssUtils;
 
 import java.util.Collections;
 import java.util.List;
 
-public class DatePrepareActivity extends Activity
+public class DataPrepareActivity extends Activity
 {
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -57,6 +57,7 @@ public class DatePrepareActivity extends Activity
                             provider.insertItem(item);
                         }
                     }
+
                     provider.close();
                 }
             }catch (Exception ex){

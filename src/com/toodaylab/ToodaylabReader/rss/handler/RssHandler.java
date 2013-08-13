@@ -1,4 +1,4 @@
-package com.toodaylab.ToodaylabReader.handler;
+package com.toodaylab.ToodaylabReader.rss.handler;
 
 import android.util.Log;
 import com.toodaylab.ToodaylabReader.rss.RssFeed;

@@ -1,8 +1,9 @@
-package com.toodaylab.ToodaylabReader.util;
+package com.toodaylab.ToodaylabReader.rss.util;
 
 import android.util.Log;
-import com.toodaylab.ToodaylabReader.handler.RssHandler;
 import com.toodaylab.ToodaylabReader.rss.RssFeed;
+import com.toodaylab.ToodaylabReader.rss.RssItem;
+import com.toodaylab.ToodaylabReader.rss.handler.RssHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
@@ -21,6 +22,8 @@ public class RssUtils {
 
     public static final String rssUri = "http://www.toodaylab.com/feed";
 
+    private static final String HTML_TAG_REGEX = "<[^>]*>";
+
     public static RssFeed getFeed(String uri){
         try {
             URL url = new URL(uri);
@@ -37,5 +40,30 @@ public class RssUtils {
             return null;
         }
 
+    }
+
+    /**
+     * 从文章中获取没有图片的文字
+     * @return
+     */
+    public static String getDescWithoutPic(RssItem item){
+        if(item.getDesc() != null){
+            return item.getDesc().replaceAll("\n","").replaceAll(HTML_TAG_REGEX,"");
+        }
+        return "";
+    }
+
+    /**
+     * 获取第一张图片
+     * @return
+     */
+    public static String getFirstPicUrlInDesc(RssItem item){
+        if(item.getDesc() != null){
+            String str = item.getDesc();
+            int start = str.indexOf("\"", str.indexOf("src", str.indexOf("<img"))) + 1;
+            int end = str.indexOf("\"", start);
+            return str.substring(start, end);
+        }
+        return null;
     }
 }
