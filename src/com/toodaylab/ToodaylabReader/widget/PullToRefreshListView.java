@@ -326,12 +326,13 @@ public class PullToRefreshListView extends ListView implements OnScrollListener 
         }  
     }  
   
-    // 计算headView的width及height值  
+    // 计算headView的width及height值
+    @SuppressWarnings({"deprecation"})
     private void measureView(View child) {  
         ViewGroup.LayoutParams p = child.getLayoutParams();  
         if (p == null) {  
-            p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,  
-                    ViewGroup.LayoutParams.WRAP_CONTENT);  
+            p = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
         }  
         int childWidthSpec = ViewGroup.getChildMeasureSpec(0, 0 + 0, p.width);  
         int lpHeight = p.height;  

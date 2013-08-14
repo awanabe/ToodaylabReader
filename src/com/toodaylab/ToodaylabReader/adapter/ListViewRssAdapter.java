@@ -1,6 +1,7 @@
 package com.toodaylab.ToodaylabReader.adapter;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.toodaylab.ToodaylabReader.R;
 import com.toodaylab.ToodaylabReader.rss.RssItem;
 import com.toodaylab.ToodaylabReader.rss.util.RssUtils;
+import com.toodaylab.ToodaylabReader.util.BitmapManager;
 
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class ListViewRssAdapter extends BaseAdapter {
     private List<RssItem> list;
     private LayoutInflater listContainer;
     private int itemViewResource;
+    private BitmapManager bmpManager;
 
     static class ListItemView{
         public ImageView img;
@@ -35,6 +38,7 @@ public class ListViewRssAdapter extends BaseAdapter {
         this.list = list;
         this.itemViewResource = itemViewResource;
         this.listContainer = LayoutInflater.from(context);
+        this.bmpManager = new BitmapManager(BitmapFactory.decodeResource(context.getResources(), R.drawable.img_loading));
     }
 
     @Override
@@ -69,9 +73,9 @@ public class ListViewRssAdapter extends BaseAdapter {
         }
 
         RssItem item = list.get(position);
+        bmpManager.loadBitmap(RssUtils.getFirstPicUrlInDesc(item), itemView.img);
         itemView.title.setText(item.getTitle());
         itemView.mini_content.setText(RssUtils.getDescWithoutPic(item));
-
         return convertView;
     }
 }

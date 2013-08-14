@@ -16,10 +16,13 @@ ToodaylabReader
 ###2013-08-14
 * 正文中去除所有htmltag
 * 正文中获取第一张图片
+###2013-08-15
+* 使用bitmap多线程下载, 并且调整图片等比放大
+* ListView 中图片文字等.
+
 
 ##TODO
 * ListView 动态 下拉刷新, 上拉加载.
-* ListView 中图片文字等.(HTML)
 * 列表页 刷新 actionBar.
 * Detail 页面中 解析 页面
 * Detail 中分享

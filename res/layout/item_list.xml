@@ -8,7 +8,8 @@
 
     <ListView android:id="@+id/itemList"
               android:layout_height="wrap_content"
-              android:layout_width="match_parent"/>
+              android:layout_width="match_parent"
+            />
 
     <com.toodaylab.ToodaylabReader.widget.PullToRefreshListView
         android:id="@+id/item_list_fresh_view"
