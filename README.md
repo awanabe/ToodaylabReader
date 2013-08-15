@@ -19,10 +19,12 @@ ToodaylabReader
 ###2013-08-15
 * 使用bitmap多线程下载, 并且调整图片等比放大
 * ListView 中图片文字等.
-
+###2013-08-16 妈蛋, 其实是16号凌晨
+* ListView 动态 下拉刷新, 上拉加载.
+* 调整了应用初始化数据的地方, 不放在splash中.
 
 ##TODO
-* ListView 动态 下拉刷新, 上拉加载.
+
 * 列表页 刷新 actionBar.
 * Detail 页面中 解析 页面
 * Detail 中分享

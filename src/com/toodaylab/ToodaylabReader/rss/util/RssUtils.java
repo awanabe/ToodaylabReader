@@ -1,5 +1,6 @@
 package com.toodaylab.ToodaylabReader.rss.util;
 
+import android.content.Context;
 import android.util.Log;
 import com.toodaylab.ToodaylabReader.rss.RssFeed;
 import com.toodaylab.ToodaylabReader.rss.RssItem;
@@ -10,6 +11,8 @@ import org.xml.sax.XMLReader;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.net.URL;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * User: awanabe
@@ -22,11 +25,17 @@ public class RssUtils {
 
     public static final String rssUri = "http://www.toodaylab.com/feed";
 
+    public static final int PAGE_SIZE = 10;
+
     private static final String HTML_TAG_REGEX = "<[^>]*>";
 
-    public static RssFeed getFeed(String uri){
+    /**
+     * 获取Feed对象, 重新加载
+     * @return RssFeed
+     */
+    private static RssFeed getFeed(){
         try {
-            URL url = new URL(uri);
+            URL url = new URL(rssUri);
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser parser = factory.newSAXParser();
             XMLReader reader = parser.getXMLReader();
@@ -40,6 +49,40 @@ public class RssUtils {
             return null;
         }
 
+    }
+
+    /**
+     * 重新刷新Feed, 新数据入库
+     * @return num 新数据的条数
+     */
+    public static int refreshFeed(Context context){
+
+        int newCount = 0;
+        RssFeed feed = getFeed();
+        if(feed != null){
+            List<RssItem> list = feed.getItemList();
+            if(list != null){
+                Collections.reverse(list);
+
+                RssProvider provider = new RssProvider(context);
+                provider.open();
+                //Get latest Item From DB
+                RssItem latestItem = provider.getLatestItem();
+                long latestTime = 0;
+                if(latestItem!=null)
+                    latestTime = latestItem.getPubdate();
+
+                for(RssItem item : list){
+                    if(item.getPubdate() > latestTime){
+                        //Log.i("DEMO", "Insert:" + String.valueOf(item.getPubdate()));
+                        newCount++;
+                        provider.insertItem(item);
+                    }
+                }
+                provider.close();
+            }
+        }
+        return newCount;
     }
 
     /**

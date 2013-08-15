@@ -13,7 +13,7 @@
         <item name="android:layout_weight">1</item>
         <item name="android:listSelector">@drawable/listview_item_selector</item>
         <item name="android:divider">@drawable/listview_divider_line</item>
-        <item name="android:dividerHeight">2.0dip</item>
+        <item name="android:dividerHeight">3.0dip</item>
         <item name="android:fadingEdge">none</item>
         <item name="android:scrollingCache">false</item>
     </style>

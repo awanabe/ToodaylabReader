@@ -28,8 +28,6 @@ public class RssProvider {
 
     private static final String TABLE_NAME = "item";
 
-    private static final int PAGE_SIZE = 10;
-
     private static final String[] DB_KEY_ORDER = new String[]{KEY_ID, KEY_TITLE, KEY_DESC, KEY_LINK, KEY_CATEGORY, KEY_PUBDATE};
     private static final String DB_DEFAULT_ORDER = "id DESC";
 
@@ -77,7 +75,7 @@ public class RssProvider {
      */
     public List<RssItem> getOnePageItems(int page){
         List<RssItem> list = new ArrayList<RssItem>();
-        int offset = page * PAGE_SIZE;
+        int offset = page * RssUtils.PAGE_SIZE;
         Cursor c = db.query(
                 true,
                 TABLE_NAME,
