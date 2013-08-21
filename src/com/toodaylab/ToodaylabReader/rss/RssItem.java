@@ -1,5 +1,7 @@
 package com.toodaylab.ToodaylabReader.rss;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -96,6 +98,7 @@ public class RssItem {
         return pubdate;
     }
 
+    @SuppressWarnings("deprecation")
     public void setPubdate(String pubdate) {
         this.pubdate = new Date(pubdate.trim()).getTime();
     }

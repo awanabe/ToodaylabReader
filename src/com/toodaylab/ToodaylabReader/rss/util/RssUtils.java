@@ -29,6 +29,9 @@ public class RssUtils {
 
     private static final String HTML_TAG_REGEX = "<[^>]*>";
 
+    private static final String HREF_REGEX = "<a [^>]*>|</a>";
+    private static final String IMG_WIDTH_REGEX = "width=\"[0-9]*\" height=\"[0-9]*\"";
+    private static final String IMG_WIDTH_STANDARD = "width=\"100%\"";
     /**
      * 获取Feed对象, 重新加载
      * @return RssFeed
@@ -106,6 +109,13 @@ public class RssUtils {
             int start = str.indexOf("\"", str.indexOf("src", str.indexOf("<img"))) + 1;
             int end = str.indexOf("\"", start);
             return str.substring(start, end);
+        }
+        return null;
+    }
+
+    public static String formatRssItemDesc(RssItem item){
+        if(item.getDesc() != null){
+           return item.getDesc().replaceAll("\n","").replaceAll(HREF_REGEX,"").replaceAll(IMG_WIDTH_REGEX,IMG_WIDTH_STANDARD);
         }
         return null;
     }

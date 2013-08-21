@@ -104,7 +104,6 @@ public class RssHandler extends DefaultHandler2{
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         String str = new String(ch, start, length);
-        Log.i("tooday", str);
 
         switch (currentState){
             case RSS_TITLE:

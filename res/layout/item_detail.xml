@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+            android:id="@+id/item_title"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_marginTop="10.0dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:textStyle="bold"
+            android:textSize="18.0dip"
+            android:textColor="@color/black"
+            android:text=""/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6.0dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:gravity="center_vertical">
+        <TextView android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="6.0dip"
+                  android:textSize="12dip"
+                  android:textColor="@color/gray"
+                  android:text="@string/detail_cate"/>
+        <TextView android:id="@+id/detail_category"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginLeft="6.0dip"
+                  android:textSize="12dip"
+                  android:textColor="@color/lightblue"
+                  android:text=""/>
+    </LinearLayout>
+    <View style="@style/detail_cut_line"/>
+    <WebView
+        android:id="@+id/detail_detail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

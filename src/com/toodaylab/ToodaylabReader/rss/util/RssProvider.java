@@ -118,6 +118,29 @@ public class RssProvider {
         return null;
     }
 
+    /**
+     * get item by id
+     * @param id
+     * @return
+     */
+    public RssItem getItemById(int id){
+        Cursor c = db.query(
+                true,
+                TABLE_NAME,
+                DB_KEY_ORDER,
+                KEY_ID+"="+id,
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        if(c.moveToFirst()){
+            return this.parseItemFromDB(c);
+        }
+        return null;
+    }
+
 
 
     private RssItem parseItemFromDB(Cursor c){

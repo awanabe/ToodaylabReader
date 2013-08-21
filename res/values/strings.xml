@@ -16,4 +16,6 @@
     <string name="load_full">已加载全部</string>
     <string name="load_empty">暂无数据</string>
     <string name="load_error">加载数据出错</string>
+
+    <string name="detail_cate">分类:</string>
 </resources>
