@@ -2,13 +2,16 @@ package com.toodaylab.ToodaylabReader;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.TextView;
 import com.toodaylab.ToodaylabReader.rss.RssItem;
 import com.toodaylab.ToodaylabReader.rss.util.RssProvider;
 import com.toodaylab.ToodaylabReader.rss.util.RssUtils;
-
-import java.net.URLEncoder;
+import com.toodaylab.ToodaylabReader.util.UIUtils;
 
 /**
  * User: awanabe
@@ -22,6 +25,7 @@ public class ItemDetailActivity extends Activity {
     private TextView itemCategory;
     private WebView itemDetail;
     private RssProvider provider = new RssProvider(this);
+    private RssItem rssItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +41,18 @@ public class ItemDetailActivity extends Activity {
         }
 
         provider.open();
-        RssItem item = provider.getItemById(postId);
+        rssItem = provider.getItemById(postId);
         provider.close();
-        if(item == null){
+        if(rssItem == null){
             finish();
         }
 
-        itemTitle.setText(item.getTitle());
-        itemCategory.setText(item.getCategoryForDB());
+        itemTitle.setText(rssItem.getTitle());
+        itemCategory.setText(rssItem.getCategoryForDB());
 
         //webView注入
         itemDetail.getSettings().setDefaultTextEncodingName("utf-8");
-        itemDetail.loadDataWithBaseURL(null, RssUtils.formatRssItemDesc(item), "text/html", "utf-8", null);
+        itemDetail.loadDataWithBaseURL(null, RssUtils.formatRssItemDesc(rssItem), "text/html", "utf-8", null);
     }
 
     private void initView() {
@@ -56,5 +60,18 @@ public class ItemDetailActivity extends Activity {
         itemTitle = (TextView)findViewById(R.id.item_title);
         itemCategory = (TextView)findViewById(R.id.detail_category);
         itemDetail = (WebView)findViewById(R.id.detail_detail);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.detail_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        UIUtils.showShareMore(this, rssItem.getTitle(), rssItem.getLink());
+        return true;
     }
 }

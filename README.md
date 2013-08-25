@@ -25,9 +25,9 @@ ToodaylabReader
 ###2013-08-22
 * Detail 页面中 解析 页面
 * 页面中去除超链接, 图片大小替换100%
+###2013-08-25
+* share 功能
 
 ##TODO
 
-* 列表页 刷新 actionBar.
-* Detail 中分享
 

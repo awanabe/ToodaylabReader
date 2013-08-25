@@ -25,7 +25,6 @@
             android:gravity="center_vertical">
         <TextView android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:layout_marginLeft="6.0dip"
                   android:textSize="12dip"
                   android:textColor="@color/gray"
                   android:text="@string/detail_cate"/>
@@ -41,5 +40,8 @@
     <WebView
         android:id="@+id/detail_detail"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="10dip"
+        />
 </LinearLayout>
