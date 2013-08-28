@@ -1,4 +1,4 @@
-ToodaylabReader
+ToodaylabReaderV0.1 
 ===============
 理想生活实验室阅读器
 
